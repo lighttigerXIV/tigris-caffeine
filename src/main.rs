@@ -1,4 +1,4 @@
-use std::process::exit;
+use std::{process::exit, thread};
 
 use caffeine_cli::caffeine::{end_protected_session, get_session, init_protected_session};
 use icons::get_icon;
@@ -99,12 +99,16 @@ fn main() {
                     };
                 }
                 "start-timed" => {
-                    let minutes = action_request.args.get(0).unwrap().parse::<u64>().unwrap();
-                    let seconds = minutes * 60;
+                    thread::spawn(move || {
+                        let minutes = action_request.args.get(0).unwrap().parse::<u64>().unwrap();
+                        let seconds = minutes * 60;
 
-                    init_protected_session(Some(seconds)).unwrap();
+                        send_notification("Caffeine", "☕ Session started");
 
-                    send_notification("Caffeine", "☕ Session started");
+                        init_protected_session(Some(seconds)).unwrap();
+                    })
+                    .join()
+                    .unwrap();
                 }
                 "disable" => {
                     if end_protected_session().is_ok() {
