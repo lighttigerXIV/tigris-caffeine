@@ -1,0 +1,10 @@
+[package]
+name = "tigris-caffeine"
+version = "0.1.0"
+edition = "2021"
+
+[dependencies]
+caffeine-cli = "1.0.1"
+tigris-rs = { path = "/home/lighttigerxiv/projects/whiskers-apps/tigris-rs", features = [
+    "extension",
+] }

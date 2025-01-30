@@ -1,0 +1,9 @@
+{
+  "id": "caffeine",
+  "name": "Caffeine",
+  "description": "An extension to prevent the screen from locking and suspending",
+  "creator_name": "lighttigerxiv",
+  "creator_link": "https://github.com/lighttigerxiv",
+  "repository_link": "https://github.com/lighttigerxiv/tigris-caffeine",
+  "settings": []
+}
