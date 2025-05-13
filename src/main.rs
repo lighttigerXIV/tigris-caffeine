@@ -1,11 +1,11 @@
-use std::{process::exit, thread};
+use std::thread;
 
 use caffeine_cli::caffeine::{end_protected_session, get_session, init_protected_session};
 use icons::get_icon;
-use tigris_rs::features::{
+use tigris_core::features::{
     actions::{ResultAction, RunExtensionAction},
     api::{
-        get_extension_request, send_search_results,
+        get_request, return_search_results,
         RequestType::{FormResults, GetResults, RunAction},
     },
     search_results::SearchResult,
@@ -15,7 +15,7 @@ use tigris_rs::features::{
 pub mod icons;
 
 fn main() {
-    let request = get_extension_request();
+    let request = get_request().unwrap();
 
     match request.request_type {
         GetResults => {
@@ -56,8 +56,7 @@ fn main() {
                     );
                 }
 
-                send_search_results(&results);
-                exit(0);
+                return_search_results(&results);
             }
 
             if !search_text.trim().is_empty() && search_text.parse::<u64>().is_ok() {
@@ -85,8 +84,7 @@ fn main() {
                 );
             }
 
-            send_search_results(&results);
-            exit(0);
+            return_search_results(&results);
         }
         RunAction => {
             let action_request = request.run_action_request.unwrap();

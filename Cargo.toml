@@ -5,6 +5,6 @@ edition = "2021"
 
 [dependencies]
 caffeine-cli = "1.0.1"
-tigris-rs = { path = "/home/lighttigerxiv/dev/whiskers-apps/pc/tigris-rs", features = [
+tigris-core = { path = "/home/lighttigerxiv/dev/whiskers-apps/pc/tigris-core", features = [
     "extension",
 ] }
